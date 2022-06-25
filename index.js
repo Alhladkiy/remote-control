@@ -13,16 +13,6 @@ console.log(`Start static http server on the ${HTTP_PORT} port!`);
 httpServer.listen(HTTP_PORT);
 
 const wsServer = new WebSocketServer({ port: WS_PORT });
-// wss.on('connection', ws => {
-//     ws.on('message', data => {
-//         const {x, y } = robot.getMousePos();
-//         ws.send(`mouse position ${x, y}`);
-//     })
-// })
-// wss.on('close', () => {
-//     console.log('exit server');
-// });
-
 
 wsServer.on('connection', (ws) => {
     const webSocketStream = createWebSocketStream(ws, { encoding: 'utf8', decodeStrings: false })
