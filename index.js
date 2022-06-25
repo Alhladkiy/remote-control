@@ -61,6 +61,7 @@ wsServer.on('connection', (ws) => {
         
         if (command === 'mouse_position') {
             ws.send(`mouse_position ${x},${y}`);
+            console.log('mouse_position:', x, y);
             return;
         }
         ws.send(command);
