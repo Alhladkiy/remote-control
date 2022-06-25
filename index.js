@@ -57,7 +57,22 @@ wsServer.on('connection', (ws) => {
             console.log('prev x:', prevValue.x, 'cur x:', x)
             robot.moveMouse(x, y);
         }
-
+        if (command === 'mouse_left') {
+            x -= width;
+            console.log('prev x:', prevValue.x, 'cur x:', x)
+            robot.moveMouse(x, y);
+        }
+  
+        if (command === 'mouse_down') {
+            y += width;
+            console.log('prev y:', prevValue.y, 'cur y:', y)
+            robot.moveMouse(x, y);
+        }
+        
+        if (command === 'mouse_position') {
+            ws.send(`mouse_position ${x},${y}`);
+            return;
+        }
         ws.send(command);
     });
   
