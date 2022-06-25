@@ -2,10 +2,8 @@ import Jimp from 'jimp';
 import {httpServer} from './src/http_server/index.js';
 import robot from 'robotjs';
 import { createWebSocketStream, WebSocketServer } from 'ws';
-import pkg from 'robotjs';
 
 
-const { getMousePos } = pkg;
 const HTTP_PORT = 3000;
 const WS_PORT = 8080;
 
@@ -28,7 +26,6 @@ wsServer.on('connection', (ws) => {
         if (!data) { 
             console.log('Invaled data') 
         }
-        console.log(data)
         let { x, y } = robot.getMousePos();
   
         const [command, coordinatesX, coordinatesY] = data.split(' ');
@@ -64,6 +61,10 @@ wsServer.on('connection', (ws) => {
             console.log('mouse_position:', x, y);
             return;
         }
+
+        if (command === 'draw_square') {
+            square(x, y, width);
+          }
         ws.send(command);
     });
   
@@ -74,3 +75,5 @@ wsServer.on('connection', (ws) => {
             console.log('server finished');
         });
     });
+
+   
